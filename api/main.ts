@@ -63,13 +63,11 @@ export interface ICast {
   character: IActor,
 }
 
-export const baseURL = 'https://api.tvmaze.com'
-
 class Main extends HttpClient {
 	private static instanceCached: Main;
 
   private constructor() {
-    super(baseURL);
+    super(process.env.NEXT_PUBLIC_BASE_URL!);
   }
 
 	static getInstance = () => {

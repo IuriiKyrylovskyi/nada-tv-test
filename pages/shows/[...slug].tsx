@@ -234,6 +234,11 @@ const MobColumn = styled.div`
 const BlockTitle = styled.p`
 	font-size: 22px;
 	margin: 10px 0;
+
+	@media (max-width: 767px) {
+		font-size: 20px;
+		margin: 0px 0 10px;
+	}
 `;
 const Label = styled.div`
 	flex: 0 0 200px;
