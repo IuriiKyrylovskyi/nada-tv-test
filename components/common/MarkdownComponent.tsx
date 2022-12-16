@@ -24,21 +24,9 @@ const Container = styled.div<{ isEllipsis: boolean }>`
 			overflow: hidden;
 			text-overflow: ellipsis;
 			display: -webkit-box;
-			-webkit-line-clamp: 4; /* number of lines to show */
+			-webkit-line-clamp: 4;
 			line-clamp: 4;
 			-webkit-box-orient: vertical;
-
-			@media (hover: hover) {
-				/* &:hover { */
-				/* position: relative; */
-				/* overflow: initial; */
-				/* text-overflow: unset; */
-				/* -webkit-line-clamp: unset;
-					line-clamp: unset;
-					max-height: 400px;
-					overflow-y: auto; */
-				/* } */
-			}
 		`}
 
 	& h1 {
@@ -124,6 +112,11 @@ const Container = styled.div<{ isEllipsis: boolean }>`
 		line-height: 1.5;
 		margin: 10px 0;
 
+		@media (max-width: 1024px) {
+			font-size: 14px;
+			line-height: 1.2;
+		}
+
 		& a {
 			color: ${({ theme }) => theme.colors.Blue};
 			margin: 0 2px;
@@ -134,10 +127,6 @@ const Container = styled.div<{ isEllipsis: boolean }>`
 				color: ${({ theme }) => theme.colors.Black};
 				text-decoration: none;
 			}
-		}
-
-		@media (max-width: 767px) {
-			font-size: 16px;
 		}
 	}
 

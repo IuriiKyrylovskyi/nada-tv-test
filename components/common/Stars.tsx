@@ -18,6 +18,10 @@ const StarsWrap = styled.div<{ size: string }>`
 	font-size: ${({ size }) => size};
 	line-height: 1;
 	position: relative;
+
+	@media (max-width: 767px) {
+		font-size: 16px;
+	}
 `;
 
 const WhiteStars = styled.div`

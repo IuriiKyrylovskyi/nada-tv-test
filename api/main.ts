@@ -35,6 +35,9 @@ export interface IShow {
   }
   image: IImage,
   summary: string,
+  _embedded:{
+    cast: ICast[]
+  }
 }
 
 export interface IScheduleItem {
@@ -77,12 +80,9 @@ class Main extends HttpClient {
 		return Main.instanceCached;
 	};
 
-  public getSchedule = () => this.instance.get<IScheduleItem[]>(`/schedule`)
+  public getSchedule = () => this.instance.get<IScheduleItem[]>(`/schedule`);
   
-  public getShow = (id: string) => this.instance.get<IShow>(`/shows/${id}`)
-
-  public getCast = (id: string) => this.instance.get<ICast[]>(`/shows/${id}/cast`)
-}
-
+  public getShow = (id: string) => this.instance.get<IShow>(`/shows/${id}?embed=cast`); 
+};
 
 export default Main;

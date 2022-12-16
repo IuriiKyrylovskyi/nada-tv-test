@@ -4,17 +4,7 @@ interface IChildren {
 	children: React.ReactNode;
 }
 
-const ContentContainer: React.FC<IChildren> = ({ children }) => (
-	<Main>
-		<Container>{children}</Container>
-	</Main>
-);
-
-const Main = styled.main`
-	width: 100%;
-	height: 100%;
-	flex: 1;
-`;
+const ContentContainer: React.FC<IChildren> = ({ children }) => <Container>{children}</Container>;
 
 export const Container = styled.div`
 	max-width: 1200px;

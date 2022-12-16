@@ -17,6 +17,14 @@ const HeaderWrap = styled.header`
 	padding: 40px 0;
 	font-size: 20px;
 	font-weight: 600;
+	background-color: ${({ theme }) => theme.colors.Yellow};
+
+	@media (max-width: 1024px) {
+		padding: 25px 0;
+	}
+	@media (max-width: 767px) {
+		padding: 15px 0;
+	}
 `;
 
 export default Header;

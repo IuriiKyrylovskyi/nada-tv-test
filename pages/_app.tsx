@@ -10,7 +10,6 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<ThemeProviderComponent>
 			<Meta />
-			<Bg />
 			<Body>
 				<Component {...pageProps} />
 			</Body>
@@ -23,12 +22,4 @@ const Body = styled.div`
 	flex-direction: column;
 	width: 100%;
 	min-height: 100vh;
-`;
-
-const Bg = styled.div`
-	position: absolute;
-	background-color: ${({ theme }) => theme.colors.Yellow};
-	width: 100vw;
-	height: 30vh;
-	z-index: -1;
 `;

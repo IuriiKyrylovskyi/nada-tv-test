@@ -4,7 +4,7 @@ import { Container } from './ContentContainer';
 
 const Footer: React.FC = () => (
 	<FooterWrap>
-		<Container>Created by Lambda Team</Container>
+		<Container>TV Bland</Container>
 	</FooterWrap>
 );
 
