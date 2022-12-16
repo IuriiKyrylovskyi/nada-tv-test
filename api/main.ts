@@ -9,19 +9,16 @@ interface ILinks {
   previousepisode: ILink,
   nextepisode: ILink
 }
+
+interface IImage {
+  medium: string,
+  original: string,
+}
 export interface IShow {
   id: number,
-  url: string,
   name: string,
-  type: string,
-  language: string,
-  genres:[],
+  genres: string[],
   status: string,
-  runtime: number,
-  averageRuntime: number,
-  premiered: string,
-  ended: any | null,
-  officialSite: string,
   schedule:{
     time: string,
     days:[
@@ -33,44 +30,34 @@ export interface IShow {
     ]
   },
   rating: { average: number },
-  weight: number,
-  network:{
-    id: number,
+  webChannel: {
     name: string,
-    country:{
-      name: string,
-      code: string,
-      timezone: string
-    },
-    officialSite: string
-  },
-  webChannel: string | null,
-  dvdCountry: string | null,
-  externals: { tvrage: string | null, thetvdb: string | null, imdb: string },
-  image: { medium: string, original: string },
+  }
+  image: IImage,
   summary: string,
-  updated: number,
-  _links: ILinks,
 }
 
 export interface IScheduleItem {
   id: number,
-  url: string,
   name: string,
-  season: number,
-  number: number,
-  type: string,
-  airdate: string,
-  airtime: string,
-  airstamp: string,
-  runtime: number,
   rating:{
-    average: null
+    average: number | null
   },
-  image: null,
+  image: IImage,
   summary: string,
   show: IShow,
-  _links: ILinks,
+}
+
+interface IActor {
+  id: number,
+  name: string,
+  gender: string,
+  image: IImage,
+}
+
+export interface ICast {
+  person: IActor,
+  character: IActor,
 }
 
 export const baseURL = 'https://api.tvmaze.com'
@@ -93,6 +80,8 @@ class Main extends HttpClient {
   public getSchedule = () => this.instance.get<IScheduleItem[]>(`/schedule`)
   
   public getShow = (id: string) => this.instance.get<IShow>(`/shows/${id}`)
+
+  public getCast = (id: string) => this.instance.get<ICast[]>(`/shows/${id}/cast`)
 }
 
 

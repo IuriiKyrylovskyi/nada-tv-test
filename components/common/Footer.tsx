@@ -11,6 +11,12 @@ const Footer: React.FC = () => (
 const FooterWrap = styled.footer`
 	width: 100%;
 	height: 100%;
+	padding: 10px 0;
+	background: ${({ theme }) => theme.colors.Yellow};
+
+	& > div {
+		text-align: right;
+	}
 `;
 
 export default Footer;

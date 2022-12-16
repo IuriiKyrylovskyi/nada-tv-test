@@ -1,13 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface IMarkdownComponent {
 	data: string;
+	isEllipsis?: boolean;
 }
 
-const MarkdownComponent: React.FC<IMarkdownComponent> = ({ data }) => {
+const MarkdownComponent: React.FC<IMarkdownComponent> = ({ data, isEllipsis = false }) => {
 	return (
 		<Container
+			isEllipsis={isEllipsis}
 			dangerouslySetInnerHTML={{
 				__html: `${data}`,
 			}}
@@ -15,25 +17,29 @@ const MarkdownComponent: React.FC<IMarkdownComponent> = ({ data }) => {
 	);
 };
 
-const Container = styled.div`
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 4; /* number of lines to show */
-	line-clamp: 4;
-	-webkit-box-orient: vertical;
+const Container = styled.div<{ isEllipsis: boolean }>`
+	${({ isEllipsis }) =>
+		isEllipsis &&
+		css`
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 4; /* number of lines to show */
+			line-clamp: 4;
+			-webkit-box-orient: vertical;
 
-	@media (hover: hover) {
-		&:hover {
-			position: relative;
-			overflow: initial;
-			text-overflow: unset;
-			-webkit-line-clamp: unset; /* number of lines to show */
-			line-clamp: unset;
-			max-height: 400px;
-			overflow-y: auto;
-		}
-	}
+			@media (hover: hover) {
+				/* &:hover { */
+				/* position: relative; */
+				/* overflow: initial; */
+				/* text-overflow: unset; */
+				/* -webkit-line-clamp: unset;
+					line-clamp: unset;
+					max-height: 400px;
+					overflow-y: auto; */
+				/* } */
+			}
+		`}
 
 	& h1 {
 		font-size: 34px;

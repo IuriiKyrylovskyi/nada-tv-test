@@ -34,6 +34,7 @@ const CardsBlock = styled.div`
 	grid-template-columns: repeat(6, 1fr);
 	column-gap: 20px;
 	row-gap: 30px;
+	margin: 50px 0 150px;
 
 	@media (max-width: 1200px) {
 		grid-template-columns: repeat(5, 1fr);

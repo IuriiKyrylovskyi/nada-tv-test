@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import styled from 'styled-components';
 
@@ -11,10 +11,8 @@ import MarkdownComponent from '../common/MarkdownComponent';
 import Link from 'next/link';
 
 const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
-	console.log(show);
-
 	return (
-		<Link href={show.url}>
+		<Link href={`/shows/${show.id}`}>
 			<Wrap>
 				<ImageBlock>
 					{show.image?.original ? (
@@ -22,10 +20,8 @@ const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
 							loader={imageLoader}
 							src={show.image.original}
 							alt={show.name}
-							fill
-							sizes='(max-width: 768px) 200px,
-              (max-width: 1200px) 200px,
-              200px'
+							objectFit='cover'
+							layout='fill'
 							blurDataURL={imageLoader({
 								src: show.image.original,
 								quality: 15,
@@ -37,11 +33,11 @@ const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
 					)}
 				</ImageBlock>
 				<InfoBlock>
-					<Stars></Stars>
+					<Rating></Rating>
 					<Title>{show.name}</Title>
-					<Info>
-						<MarkdownComponent data={show.summary} />
-					</Info>
+					<Summary>
+						<MarkdownComponent data={show.summary} isEllipsis />
+					</Summary>
 				</InfoBlock>
 			</Wrap>
 		</Link>
@@ -55,6 +51,7 @@ const Wrap = styled.div`
 	cursor: pointer;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 	border-radius: 3px;
+	background: ${({ theme }) => theme.colors.White};
 	overflow: hidden;
 	transition: all 0.5s ease;
 
@@ -63,6 +60,7 @@ const Wrap = styled.div`
 	@media (hover: hover) {
 		&:hover {
 			box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+			transform: scale(1.05);
 		}
 	}
 `;
@@ -90,11 +88,11 @@ const InfoBlock = styled.div`
 	font-size: 14px;
 `;
 
-const Stars = styled.div``;
+const Rating = styled.div``;
 const Title = styled.h3`
 	flex: 1;
 `;
-const Info = styled.div`
+const Summary = styled.div`
 	flex: 1;
 `;
 

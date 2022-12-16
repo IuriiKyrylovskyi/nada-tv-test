@@ -30,7 +30,11 @@ export const Section = styled.section`
 	}
 `;
 
-const InfoBlock = styled.div``;
+const InfoBlock = styled.div`
+	margin: 50px 0 100px;
+	font-size: 26px;
+	max-width: 600px;
+`;
 const Text = styled.p`
 	font-size: 20px;
 	line-height: 1.5;

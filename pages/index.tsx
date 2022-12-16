@@ -28,8 +28,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 const HomePage: React.FC<IProps> = ({ items }) => {
-	console.log(items);
-
 	return (
 		<Layout>
 			<Home items={items} />
