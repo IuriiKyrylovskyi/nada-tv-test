@@ -3,12 +3,13 @@ import styled from 'styled-components';
 interface IStar {
 	size?: string;
 	rating?: number;
+	isBlue?: boolean;
 }
 
-const Stars: React.FC<IStar> = ({ size = '30px', rating = 0 }) => (
+const Stars: React.FC<IStar> = ({ size = '30px', rating = 0, isBlue = false }) => (
 	<StarsWrap size={size}>
 		<WhiteStars />
-		<YellowStars rating={rating} />
+		<YellowStars rating={rating} isBlue={isBlue} />
 	</StarsWrap>
 );
 
@@ -33,7 +34,7 @@ const WhiteStars = styled.div`
 		-webkit-text-fill-color: #ffffff;
 	}
 `;
-const YellowStars = styled.div<{ rating: number }>`
+const YellowStars = styled.div<{ rating: number; isBlue: boolean }>`
 	position: relative;
 	z-index: 1;
 	width: calc(${({ rating }) => rating} / 5 * 100%);
@@ -43,7 +44,8 @@ const YellowStars = styled.div<{ rating: number }>`
 		content: '★★★★★';
 		letter-spacing: 3px;
 		background-clip: text;
-		-webkit-text-fill-color: ${({ theme }) => theme.colors.Blue};
+		-webkit-text-fill-color: ${({ theme, isBlue }) =>
+			isBlue ? theme.colors.Blue : theme.colors.Yellow};
 	}
 `;
 

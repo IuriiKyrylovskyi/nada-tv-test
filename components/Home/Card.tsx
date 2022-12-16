@@ -9,6 +9,7 @@ import imageLoader from '../../helpers/imageLoader';
 import DefaultImage from '../common/DefaultImage';
 import MarkdownComponent from '../common/MarkdownComponent';
 import Link from 'next/link';
+import Stars from '../common/Stars';
 
 const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
 	return (
@@ -33,7 +34,9 @@ const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
 					)}
 				</ImageBlock>
 				<InfoBlock>
-					<Rating></Rating>
+					<Rating>
+						<Stars size='10' rating={show.rating.average} />
+					</Rating>
 					<Title>{show.name}</Title>
 					<Summary>
 						<MarkdownComponent data={show.summary} isEllipsis />
@@ -88,7 +91,9 @@ const InfoBlock = styled.div`
 	font-size: 14px;
 `;
 
-const Rating = styled.div``;
+const Rating = styled.div`
+	margin: 0 0 10px 0;
+`;
 const Title = styled.h3`
 	flex: 1;
 `;

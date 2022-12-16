@@ -76,7 +76,7 @@ const ShowPage: NextPage<IProps> = ({ show, cast }) => {
 					</ImageWrap>
 					<TitleWrap>
 						<Rating>
-							<Stars rating={+rating} />
+							<Stars rating={+rating} isBlue />
 							<Rate>{`${rating}/5`}</Rate>
 						</Rating>
 						<Title>{show.name}</Title>
