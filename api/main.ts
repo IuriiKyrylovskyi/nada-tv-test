@@ -9,7 +9,7 @@ interface ILinks {
   previousepisode: ILink,
   nextepisode: ILink
 }
-interface IShow {
+export interface IShow {
   id: number,
   url: string,
   name: string,
@@ -53,7 +53,7 @@ interface IShow {
   _links: ILinks,
 }
 
-interface IScheduleItem {
+export interface IScheduleItem {
   id: number,
   url: string,
   name: string,
@@ -73,7 +73,7 @@ interface IScheduleItem {
   _links: ILinks,
 }
 
-const baseURL = 'https://api.tvmaze.com'
+export const baseURL = 'https://api.tvmaze.com'
 
 class Main extends HttpClient {
 	private static instanceCached: Main;
@@ -90,9 +90,9 @@ class Main extends HttpClient {
 		return Main.instanceCached;
 	};
 
-  public getSchedule = (pageNumber = '1') => this.instance.get<IScheduleItem[]>(`/schedule?page=${pageNumber}`)
+  public getSchedule = () => this.instance.get<IScheduleItem[]>(`/schedule`)
   
-  public getShows = (id: string) => this.instance.get<IShow>(`/shows/${id}`)
+  public getShow = (id: string) => this.instance.get<IShow>(`/shows/${id}`)
 }
 
 

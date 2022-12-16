@@ -16,6 +16,8 @@ body {
 	color: #000000;
 	background: #ffffff;
 	font-family: 'Inter', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 a {

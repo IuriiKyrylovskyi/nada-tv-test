@@ -1,21 +1,40 @@
-import styled from 'styled-components';
+import { GetServerSideProps } from 'next';
+
+import { IScheduleItem } from '../api/main';
 
 import Layout from '../components/common/Layout';
+import Home from '../components/Home/Home';
+import fetchScheduleItems from '../helpers/fetchScheduleItems';
 
-const HomePage = () => {
+interface IProps {
+	items: IScheduleItem[];
+}
+
+const revalidateInterval = 5;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	ctx.res.setHeader(
+		'Cache-Control',
+		`public, s-maxage=1, stale-while-revalidate=${revalidateInterval}`,
+	);
+
+	const items = await fetchScheduleItems();
+
+	return {
+		props: {
+			items,
+		},
+	};
+};
+
+const HomePage: React.FC<IProps> = ({ items }) => {
+	console.log(items);
+
 	return (
 		<Layout>
-			<Section>dhlfdshgsd</Section>
+			<Home items={items} />
 		</Layout>
 	);
 };
-
-const Section = styled.section`
-	margin: 80px 40px 100px;
-
-	@media (max-width: 767px) {
-		margin: 40px 10px 60px;
-	}
-`;
 
 export default HomePage;
