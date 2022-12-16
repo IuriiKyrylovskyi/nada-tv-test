@@ -56,10 +56,8 @@ const Wrap = styled.div`
 	border-radius: 3px;
 	background: ${({ theme }) => theme.colors.White};
 	overflow: hidden;
-	transition: all 0.5s ease;
+	transition: all 0.3s ease;
 
-	@media (max-width: 767px) {
-	}
 	@media (hover: hover) {
 		&:hover {
 			box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
@@ -75,7 +73,7 @@ const ImageBlock = styled.div`
 	aspect-ratio: 2/3;
 
 	& img {
-		transition: all 0.5s ease;
+		transition: all 0.3s ease;
 	}
 
 	& img:hover {
@@ -89,6 +87,7 @@ const InfoBlock = styled.div`
 	flex-direction: column;
 	padding: 20px 10px;
 	font-size: 14px;
+	/* max-height: 200px; */
 `;
 
 const Rating = styled.div`

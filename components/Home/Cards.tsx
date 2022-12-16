@@ -1,13 +1,42 @@
-import React, { Fragment } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { IScheduleItem } from '../../api/main';
+import fetchSchedulePage from '../../helpers/fetchSchedulePage';
+import formatDate from '../../helpers/formatDate';
 import ContentContainer from '../common/ContentContainer';
+import Pagination from '../common/Pagination';
 
 import Card from './Card';
 import { Section } from './Home';
 
-const Cards: React.FC<{ items: IScheduleItem[] }> = ({ items }) => {
+interface ICards {
+	items: IScheduleItem[];
+	setScheduleItems: (key: IScheduleItem[] | any) => void;
+}
+
+const Cards: React.FC<ICards> = ({ items, setScheduleItems }) => {
+	const [page, setPage] = useState(1);
+	const [isLoading, setIsloading] = useState(false);
+	const maxPaginationPage = 100;
+
+	useEffect(() => {
+		const today = new Date();
+		const date = formatDate(today.setDate(today.getDate() - page + 1));
+
+		handlePagin(date);
+	}, [page]);
+
+	const handlePagin = async (date: string) => {
+		setIsloading(true);
+
+		const newItems = await fetchSchedulePage(date);
+
+		setScheduleItems(newItems);
+		setIsloading(false);
+	};
+
 	return (
 		<Section>
 			<InfoBlock>
@@ -18,6 +47,15 @@ const Cards: React.FC<{ items: IScheduleItem[] }> = ({ items }) => {
 			<CardsWrap>
 				<Bg />
 				<ContentContainer>
+					<Pagination
+						currentPage={page}
+						setCurrentPage={setPage}
+						isLoading={isLoading}
+						maxPaginationPage={maxPaginationPage}
+
+						// isEmpty
+						// isArrowLoading
+					/>
 					<CardsBlock>
 						{items.length > 0
 							? items.map((item) => (
@@ -50,6 +88,7 @@ const Bg = styled.div`
 	width: 100%;
 	height: 150px;
 	background-color: ${({ theme }) => theme.colors.Yellow};
+	z-index: -1;
 
 	@media (max-width: 767px) {
 		background-color: transparent;
