@@ -1,6 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/legacy/image';
-
 import styled from 'styled-components';
 
 import { IScheduleItem } from '../../api/main';
@@ -8,23 +8,22 @@ import imageLoader from '../../helpers/imageLoader';
 
 import DefaultImage from '../common/DefaultImage';
 import MarkdownComponent from '../common/MarkdownComponent';
-import Link from 'next/link';
 import Stars from '../common/Stars';
 
 const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
 	return (
-		<Link href={`/shows/${show.id}`}>
-			<Wrap>
+		<Wrap>
+			<Link href={`/shows/${show.id}`}>
 				<ImageBlock>
-					{show.image?.original ? (
+					{show.image?.medium ? (
 						<Image
 							loader={imageLoader}
-							src={show.image.original}
+							src={show.image.medium}
 							alt={show.name}
 							objectFit='cover'
 							layout='fill'
 							blurDataURL={imageLoader({
-								src: show.image.original,
+								src: show.image.medium,
 								quality: 15,
 							})}
 							placeholder='blur'
@@ -42,8 +41,8 @@ const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
 						<MarkdownComponent data={show.summary} isEllipsis />
 					</Summary>
 				</InfoBlock>
-			</Wrap>
-		</Link>
+			</Link>
+		</Wrap>
 	);
 };
 
@@ -56,10 +55,8 @@ const Wrap = styled.div`
 	border-radius: 3px;
 	background: ${({ theme }) => theme.colors.White};
 	overflow: hidden;
-	transition: all 0.5s ease;
+	transition: all 0.3s ease;
 
-	@media (max-width: 767px) {
-	}
 	@media (hover: hover) {
 		&:hover {
 			box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
@@ -75,7 +72,8 @@ const ImageBlock = styled.div`
 	aspect-ratio: 2/3;
 
 	& img {
-		transition: all 0.5s ease;
+		transition: all 0.3s ease;
+		max-width: 100%;
 	}
 
 	& img:hover {
@@ -96,6 +94,7 @@ const Rating = styled.div`
 `;
 const Title = styled.h3`
 	flex: 1;
+	margin-bottom: 10px;
 `;
 const Summary = styled.div`
 	flex: 1;

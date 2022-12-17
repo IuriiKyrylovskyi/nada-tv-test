@@ -9,7 +9,7 @@ interface IStar {
 const Stars: React.FC<IStar> = ({ size = '30px', rating = 0, isBlue = false }) => (
 	<StarsWrap size={size}>
 		<WhiteStars />
-		<YellowStars rating={rating} isBlue={isBlue} />
+		<ColoredStars rating={rating} isBlue={isBlue} />
 	</StarsWrap>
 );
 
@@ -38,7 +38,7 @@ const WhiteStars = styled.div`
 		-webkit-text-fill-color: #ffffff;
 	}
 `;
-const YellowStars = styled.div<{ rating: number; isBlue: boolean }>`
+const ColoredStars = styled.div<{ rating: number; isBlue: boolean }>`
 	position: relative;
 	z-index: 1;
 	width: calc(${({ rating }) => rating} / 5 * 100%);

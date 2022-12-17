@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
 
 import { IScheduleItem } from '../api/main';
+import fetchScheduleItems from '../helpers/fetchScheduleItems';
 
 import Layout from '../components/common/Layout';
 import Home from '../components/Home/Home';
-import fetchScheduleItems from '../helpers/fetchScheduleItems';
 
 interface IProps {
 	items: IScheduleItem[];

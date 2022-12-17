@@ -1,13 +1,45 @@
-import React, { Fragment } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { IScheduleItem } from '../../api/main';
-import ContentContainer from '../common/ContentContainer';
-
-import Card from './Card';
+import fetchSchedulePage from '../../helpers/fetchSchedulePage';
+import formatDate from '../../helpers/formatDate';
 import { Section } from './Home';
 
-const Cards: React.FC<{ items: IScheduleItem[] }> = ({ items }) => {
+import ContentContainer from '../common/ContentContainer';
+import Pagination from '../common/Pagination';
+import Card from './Card';
+
+interface ICards {
+	items: IScheduleItem[];
+	setScheduleItems: (key: IScheduleItem[] | any) => void;
+}
+
+const Cards: React.FC<ICards> = ({ items, setScheduleItems }) => {
+	const [page, setPage] = useState(1);
+	const [isLoading, setIsloading] = useState(false);
+	const maxPaginationPage = 100; // api doesn't provide total number of items or pages
+
+	// useEffect(() => {
+	// 	const today = new Date();
+	// 	const date = formatDate(today.setDate(today.getDate() - page + 1));
+
+	// 	handlePagin(date);
+	// }, []);
+
+	const handlePagin = async (page: number) => {
+		const today = new Date();
+		const date = formatDate(today.setDate(today.getDate() - page + 1));
+
+		setIsloading(true);
+
+		const newItems = await fetchSchedulePage(date);
+
+		setScheduleItems(newItems);
+		setIsloading(false);
+	};
+
 	return (
 		<Section>
 			<InfoBlock>
@@ -18,6 +50,13 @@ const Cards: React.FC<{ items: IScheduleItem[] }> = ({ items }) => {
 			<CardsWrap>
 				<Bg />
 				<ContentContainer>
+					<Pagination
+						currentPage={page}
+						setCurrentPage={setPage}
+						handlePagin={handlePagin}
+						isLoading={isLoading}
+						maxPaginationPage={maxPaginationPage}
+					/>
 					<CardsBlock>
 						{items.length > 0
 							? items.map((item) => (
@@ -50,6 +89,7 @@ const Bg = styled.div`
 	width: 100%;
 	height: 150px;
 	background-color: ${({ theme }) => theme.colors.Yellow};
+	z-index: -1;
 
 	@media (max-width: 767px) {
 		background-color: transparent;
@@ -66,12 +106,16 @@ const Title = styled.h1`
 const CardsBlock = styled.div`
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
+
 	column-gap: 20px;
 	row-gap: 30px;
 	padding: 50px 0 150px;
 
 	@media (max-width: 1200px) {
 		grid-template-columns: repeat(5, 1fr);
+		& > a {
+			max-width: 175px;
+		}
 	}
 	@media (max-width: 1000px) {
 		grid-template-columns: repeat(4, 1fr);

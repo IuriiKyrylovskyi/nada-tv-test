@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import removeTags from '../../helpers/removeTags';
 
 interface IMarkdownComponent {
 	data: string;
@@ -7,11 +8,20 @@ interface IMarkdownComponent {
 }
 
 const MarkdownComponent: React.FC<IMarkdownComponent> = ({ data, isEllipsis = false }) => {
+	let htmlString: string;
+
+	if (isEllipsis) {
+		htmlString = removeTags(data);
+	} else {
+		htmlString = data;
+	}
+
 	return (
 		<Container
+			id='truncateme'
 			isEllipsis={isEllipsis}
 			dangerouslySetInnerHTML={{
-				__html: `${data}`,
+				__html: `${htmlString}`,
 			}}
 		/>
 	);

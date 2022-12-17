@@ -80,6 +80,8 @@ class Main extends HttpClient {
 
   public getSchedule = () => this.instance.get<IScheduleItem[]>(`/schedule`);
   
+  public getSchedulePage = (date: string) => this.instance.get<IScheduleItem[]>(`/schedule?date=${date}`);
+  
   public getShow = (id: string) => this.instance.get<IShow>(`/shows/${id}?embed=cast`); 
 };
 

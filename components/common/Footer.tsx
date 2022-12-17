@@ -1,10 +1,13 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { Container } from './ContentContainer';
 
 const Footer: React.FC = () => (
 	<FooterWrap>
-		<Container>TV Bland</Container>
+		<Container>
+			<Link href={'/'}>TV Bland</Link>
+		</Container>
 	</FooterWrap>
 );
 
@@ -14,7 +17,7 @@ const FooterWrap = styled.footer`
 	padding: 10px 0;
 	background: ${({ theme }) => theme.colors.Yellow};
 
-	& > div {
+	& div {
 		text-align: right;
 	}
 `;

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { IScheduleItem } from '../../api/main';
+import { IScheduleItem, IShow } from '../../api/main';
 import ContentContainer from '../common/ContentContainer';
 
 import Cards from './Cards';
 
 const Home: React.FC<{ items: IScheduleItem[] }> = ({ items }) => {
+	const [scheduleItems, setScheduleItems] = useState<IScheduleItem[]>(items);
 	return (
 		<>
 			<Section>
@@ -22,7 +23,7 @@ const Home: React.FC<{ items: IScheduleItem[] }> = ({ items }) => {
 					</ContentContainer>
 				</Wrap>
 			</Section>
-			<Cards items={items} />
+			<Cards items={scheduleItems} setScheduleItems={setScheduleItems} />
 		</>
 	);
 };

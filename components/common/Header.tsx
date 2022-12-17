@@ -5,9 +5,9 @@ import { Container } from './ContentContainer';
 
 const Header: React.FC = () => (
 	<HeaderWrap>
-		<Link href={'/'}>
-			<Container>TV Bland</Container>
-		</Link>
+		<Container>
+			<Link href={'/'}>TV Bland</Link>
+		</Container>
 	</HeaderWrap>
 );
 
