@@ -21,14 +21,17 @@ const Cards: React.FC<ICards> = ({ items, setScheduleItems }) => {
 	const [isLoading, setIsloading] = useState(false);
 	const maxPaginationPage = 100; // api doesn't provide total number of items or pages
 
-	useEffect(() => {
+	// useEffect(() => {
+	// 	const today = new Date();
+	// 	const date = formatDate(today.setDate(today.getDate() - page + 1));
+
+	// 	handlePagin(date);
+	// }, []);
+
+	const handlePagin = async (page: number) => {
 		const today = new Date();
 		const date = formatDate(today.setDate(today.getDate() - page + 1));
 
-		handlePagin(date);
-	}, [page]);
-
-	const handlePagin = async (date: string) => {
 		setIsloading(true);
 
 		const newItems = await fetchSchedulePage(date);
@@ -50,6 +53,7 @@ const Cards: React.FC<ICards> = ({ items, setScheduleItems }) => {
 					<Pagination
 						currentPage={page}
 						setCurrentPage={setPage}
+						handlePagin={handlePagin}
 						isLoading={isLoading}
 						maxPaginationPage={maxPaginationPage}
 					/>

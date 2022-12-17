@@ -6,6 +6,7 @@ interface Props {
 	maxPaginationPage: number;
 	currentPage: number;
 	setCurrentPage: (currentPage: number) => void;
+	handlePagin: (currentPage: number) => void;
 	isLoading: boolean;
 }
 
@@ -13,6 +14,7 @@ const Pagination: React.FC<Props> = ({
 	maxPaginationPage,
 	currentPage,
 	setCurrentPage,
+	handlePagin,
 	isLoading,
 }) => {
 	const firstRef = useRef(null);
@@ -32,12 +34,14 @@ const Pagination: React.FC<Props> = ({
 	const handleArrowLeftClick = () => {
 		if (isLeftArrowActive && !isLoading) {
 			setCurrentPage(currentPage - 1);
+			handlePagin(currentPage - 1);
 		}
 	};
 
 	const handleArrowRightClick = () => {
 		if (isRightArrowActive && !isLoading) {
 			setCurrentPage(currentPage + 1);
+			handlePagin(currentPage + 1);
 		}
 	};
 
@@ -45,6 +49,7 @@ const Pagination: React.FC<Props> = ({
 		if (edgeRef.current && !isLoading) {
 			const page = +edgeRef.current?.innerText;
 			setCurrentPage(page);
+			handlePagin(page);
 		}
 	};
 
