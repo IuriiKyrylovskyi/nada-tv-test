@@ -2,36 +2,27 @@ import React, { useMemo, useRef } from 'react';
 import styled, { css } from 'styled-components';
 import LoaderDots from './LoaderDots';
 
-// import LoadingContainer from '@/Components/common/LoadingContainer';
-// import LoaderDots from '@/Components/common/LoaderDots';
-
 interface Props {
 	maxPaginationPage: number;
-	// maxTotal: number;
-	// itemsPerPage: number;
 	currentPage: number;
 	setCurrentPage: (currentPage: number) => void;
 	isLoading: boolean;
-	// isEmpty: boolean;
-	// isArrowLoading: boolean;
 }
 
 const Pagination: React.FC<Props> = ({
 	maxPaginationPage,
-	// maxTotal,
-	// itemsPerPage,
 	currentPage,
 	setCurrentPage,
 	isLoading,
-	// isEmpty,
-	// isArrowLoading,
 }) => {
 	const firstRef = useRef(null);
 	const lastRef = useRef(null);
+	const prevFirstRef = useRef(null);
+	const prevLastRef = useRef(null);
 
 	const isLeftArrowActive = useMemo(
-		() => currentPage > 1 && currentPage < maxPaginationPage && !isLoading,
-		[currentPage, isLoading, maxPaginationPage],
+		() => currentPage > 1 && !isLoading,
+		[currentPage, isLoading],
 	);
 	const isRightArrowActive = useMemo(
 		() => maxPaginationPage > currentPage && !isLoading,
@@ -78,18 +69,29 @@ const Pagination: React.FC<Props> = ({
 								1
 							</Text>
 						</PaginItem>
-						{currentPage > 2 && <Text>...</Text>}
+						{currentPage > 3 && <Text>...</Text>}
 					</>
 				)}
-				<PaginItem
-					// isDisabled={currentPage === 1 || currentPage === maxPaginationPage || isLoading}
-					isDisabled
-				>
+				{currentPage > 2 && (
+					<PaginItem isDisabled={isLoading}>
+						<Text ref={prevFirstRef} onClick={() => handleEdgePaginClick(prevFirstRef)}>
+							{currentPage - 1}
+						</Text>
+					</PaginItem>
+				)}
+				<PaginItem isDisabled isActive>
 					<Text>{currentPage}</Text>
 				</PaginItem>
+				{currentPage < maxPaginationPage - 1 && (
+					<PaginItem isDisabled={isLoading}>
+						<Text ref={prevLastRef} onClick={() => handleEdgePaginClick(prevLastRef)}>
+							{currentPage + 1}
+						</Text>
+					</PaginItem>
+				)}
 				{currentPage !== maxPaginationPage && (
 					<>
-						{currentPage < 99 && <Text>...</Text>}
+						{currentPage < maxPaginationPage - 2 && <Text>...</Text>}
 						<PaginItem isDisabled={isLoading}>
 							<Text ref={lastRef} onClick={() => handleEdgePaginClick(lastRef)}>
 								{maxPaginationPage}
@@ -178,7 +180,7 @@ const Wrap = styled.div`
 	display: flex;
 `;
 
-const PaginItem = styled.div<{ isDisabled?: boolean }>`
+const PaginItem = styled.div<{ isDisabled?: boolean; isActive?: boolean }>`
 	flex: 1 0 auto;
 	min-width: 20px;
 	margin: 0 3px;
@@ -198,6 +200,13 @@ const PaginItem = styled.div<{ isDisabled?: boolean }>`
 					color: ${({ theme }) => theme.colors.White};
 				}
 			}
+		`}
+
+	${({ isActive }) =>
+		isActive &&
+		css`
+			background: ${({ theme }) => theme.colors.Blue};
+			color: ${({ theme }) => theme.colors.White};
 		`}
 `;
 

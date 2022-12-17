@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { IScheduleItem } from '../../api/main';
 import fetchSchedulePage from '../../helpers/fetchSchedulePage';
 import formatDate from '../../helpers/formatDate';
+import { Section } from './Home';
+
 import ContentContainer from '../common/ContentContainer';
 import Pagination from '../common/Pagination';
-
 import Card from './Card';
-import { Section } from './Home';
 
 interface ICards {
 	items: IScheduleItem[];
@@ -19,7 +19,7 @@ interface ICards {
 const Cards: React.FC<ICards> = ({ items, setScheduleItems }) => {
 	const [page, setPage] = useState(1);
 	const [isLoading, setIsloading] = useState(false);
-	const maxPaginationPage = 100;
+	const maxPaginationPage = 100; // api doesn't provide total number of items or pages
 
 	useEffect(() => {
 		const today = new Date();
@@ -52,9 +52,6 @@ const Cards: React.FC<ICards> = ({ items, setScheduleItems }) => {
 						setCurrentPage={setPage}
 						isLoading={isLoading}
 						maxPaginationPage={maxPaginationPage}
-
-						// isEmpty
-						// isArrowLoading
 					/>
 					<CardsBlock>
 						{items.length > 0
@@ -105,12 +102,16 @@ const Title = styled.h1`
 const CardsBlock = styled.div`
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
+
 	column-gap: 20px;
 	row-gap: 30px;
 	padding: 50px 0 150px;
 
 	@media (max-width: 1200px) {
 		grid-template-columns: repeat(5, 1fr);
+		& > a {
+			max-width: 175px;
+		}
 	}
 	@media (max-width: 1000px) {
 		grid-template-columns: repeat(4, 1fr);

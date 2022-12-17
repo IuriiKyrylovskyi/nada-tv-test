@@ -15,6 +15,7 @@ interface IProps {
 
 const Show: React.FC<IProps> = ({ show }) => {
 	const rating = !!show?.rating?.average ? (show.rating.average / 2).toFixed(1) : 0;
+	const image = show?.image?.original || show?.image?.medium;
 
 	return (
 		<>
@@ -22,15 +23,15 @@ const Show: React.FC<IProps> = ({ show }) => {
 				<ContentContainer>
 					<TopBlock>
 						<ImageWrap>
-							{show.image?.original ? (
+							{!!image ? (
 								<Image
 									loader={imageLoader}
-									src={show.image.original}
+									src={image}
 									alt={show.name}
 									layout='fill'
 									objectFit='cover'
 									blurDataURL={imageLoader({
-										src: show.image.original,
+										src: image,
 										quality: 15,
 									})}
 									placeholder='blur'
@@ -140,11 +141,12 @@ const InfoBlock = styled.div`
 	}
 `;
 const ImageWrap = styled.div`
-	flex: 0 0 20%;
-	width: 20%;
+	flex: 0 0 25%;
+	width: 25%;
 	min-width: 230px;
 	position: relative;
 	aspect-ratio: 2/3;
+	max-height: 450px;
 	overflow: hidden;
 	transform: translateY(25px);
 

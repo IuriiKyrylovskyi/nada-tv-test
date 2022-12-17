@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
+import removeTags from '../../helpers/removeTags';
 
 interface IMarkdownComponent {
 	data: string;
@@ -7,41 +8,20 @@ interface IMarkdownComponent {
 }
 
 const MarkdownComponent: React.FC<IMarkdownComponent> = ({ data, isEllipsis = false }) => {
-	// console.log(data);
+	let htmlString: string;
 
-	// useEffect(() => {
-	// 	var linesElement = 3 as any; //it will truncate at 3 lines.
-	// 	var truncateElement = document.getElementById('truncateme');
-	// 	var truncateText = truncateElement?.textContent;
-
-	// 	var getLineHeight = function getLineHeight(element) {
-	// 		var lineHeight = window.getComputedStyle(truncateElement)['line-height'];
-	// 		if (lineHeight === 'normal') {
-	// 			// sucky chrome
-	// 			return 1.16 * parseFloat(window.getComputedStyle(truncateElement)['font-size']);
-	// 		} else {
-	// 			return parseFloat(lineHeight);
-	// 		}
-	// 	};
-
-	// 	truncateElement.innerHTML = truncateText;
-	// 	var truncateTextParts = truncateText.split(' ');
-	// 	var lineHeight = getLineHeight(truncateElement);
-	// 	var lines = parseInt(linesElement.value);
-
-	// 	while (lines * lineHeight < truncateElement.clientHeight) {
-	// 		console.log(truncateTextParts.length, lines * lineHeight, truncateElement.clientHeight);
-	// 		truncateTextParts.pop();
-	// 		truncateElement.innerHTML = truncateTextParts.join(' ') + '...';
-	// 	}
-	// }, []);
+	if (isEllipsis) {
+		htmlString = removeTags(data);
+	} else {
+		htmlString = data;
+	}
 
 	return (
 		<Container
 			id='truncateme'
 			isEllipsis={isEllipsis}
 			dangerouslySetInnerHTML={{
-				__html: `${data}`,
+				__html: `${htmlString}`,
 			}}
 		/>
 	);
@@ -57,19 +37,6 @@ const Container = styled.div<{ isEllipsis: boolean }>`
 			-webkit-line-clamp: 4;
 			line-clamp: 4;
 			-webkit-box-orient: vertical;
-
-			/* & > p {
-				margin-bottom: 0;
-			} */
-
-			/* & > p {
-				overflow: hidden;
-				text-overflow: ellipsis;
-				display: -webkit-box;
-				-webkit-line-clamp: 4;
-				line-clamp: 4;
-				-webkit-box-orient: vertical;
-			} */
 		`}
 
 	& h1 {
