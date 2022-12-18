@@ -1,15 +1,5 @@
 import HttpClient from './http-client';
 
-interface ILink {
-  href: string,
-}
-
-interface ILinks {
-  self: ILink,
-  previousepisode: ILink,
-  nextepisode: ILink
-}
-
 interface IImage {
   medium: string,
   original: string,
@@ -21,33 +11,21 @@ export interface IShow {
   status: string,
   schedule:{
     time: string,
-    days:[
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday"
-    ]
+    days: string[],
   },
-  rating: { average: number },
+  rating: { average: number | null },
   webChannel: {
     name: string,
-  }
-  image: IImage,
+  } | null,
+  image: IImage | null,
   summary: string,
-  _embedded:{
+  _embedded?:{
     cast: ICast[]
   }
 }
 
 export interface IScheduleItem {
   id: number,
-  name: string,
-  rating:{
-    average: number | null
-  },
-  image: IImage,
-  summary: string,
   show: IShow,
 }
 

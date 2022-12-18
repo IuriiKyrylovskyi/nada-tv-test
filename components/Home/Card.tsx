@@ -34,9 +34,9 @@ const Card: React.FC<{ item: IScheduleItem }> = ({ item: { show } }) => {
 				</ImageBlock>
 				<InfoBlock>
 					<Rating>
-						<Stars size='10' rating={show.rating.average} />
+						<Stars size='10' rating={show.rating.average || 0} />
 					</Rating>
-					<Title>{show.name}</Title>
+					<Title data-testid={`item-title-${show.id}`}>{show.name}</Title>
 					<Summary>
 						<MarkdownComponent data={show.summary} isEllipsis />
 					</Summary>

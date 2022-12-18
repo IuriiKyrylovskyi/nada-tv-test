@@ -1,3 +1,4 @@
+import React from 'react';
 import Image from 'next/legacy/image';
 import styled from 'styled-components';
 
@@ -11,10 +12,10 @@ import ContentContainer from '../../components/common/ContentContainer';
 
 interface IProps {
 	show: IShow;
+	id?: number;
 }
 
 const Show: React.FC<IProps> = ({ show }) => {
-	const rating = !!show?.rating?.average ? (show.rating.average / 2).toFixed(1) : 0;
 	const image = show?.image?.original || show?.image?.medium;
 
 	return (
@@ -42,10 +43,12 @@ const Show: React.FC<IProps> = ({ show }) => {
 						</ImageWrap>
 						<TitleWrap>
 							<Rating>
-								<Stars rating={+rating} isBlue />
-								<Rate>{`${rating}/5`}</Rate>
+								<Stars rating={show.rating.average || 0} isBlue />
+								<Rate data-testid={`rating-${show.rating.average}`}>{`${
+									show.rating.average ? (show.rating.average / 2).toFixed(1) : 0
+								}/5`}</Rate>
 							</Rating>
-							<Title>{show.name}</Title>
+							<Title data-testid={`name-${show.id}`}>{show.name}</Title>
 							<Summary>
 								<MarkdownComponent data={show.summary} />
 							</Summary>
@@ -80,7 +83,7 @@ const Show: React.FC<IProps> = ({ show }) => {
 							</Row>
 						)}
 					</Column>
-					{show._embedded.cast?.length > 0 && (
+					{show._embedded && show._embedded.cast?.length > 0 && (
 						<Column>
 							<BlockTitle>Starring</BlockTitle>
 							{show._embedded.cast.map(({ person, character }) => (
