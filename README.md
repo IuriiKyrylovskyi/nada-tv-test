@@ -27,6 +27,13 @@ run jest tests
  
   ```bash
 pnpm jest
+``` 
+
+
+ 
+run e2e tests (playwright)
+```bash 
+npx playwright test
 ```
   
 
