@@ -11,7 +11,14 @@ yarn dev
 ```
 variables: 
 
-NEXT_PUBLIC_BASE_URL=https://api.tvmaze.com
+NEXT_PUBLIC_BASE_URL=https://api.tvmaze.com 
+ 
+ 
+run jest tests -->> pnpm jest 
+ 
+  
+  
+ 
 
 
 
