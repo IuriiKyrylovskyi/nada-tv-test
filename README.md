@@ -8,17 +8,30 @@ First, run the development server:
 pnpm run dev
 # or
 yarn dev
-```
+``` 
+
+ 
+  
+  
+  
 variables: 
 
+```bash
 NEXT_PUBLIC_BASE_URL=https://api.tvmaze.com 
+```
+
  
+
  
 run jest tests -->> pnpm jest 
  
+  ```bash
+pnpm jest
+```
   
-  
- 
+ ```bash
+------------------------------------
+```
 
 
 
