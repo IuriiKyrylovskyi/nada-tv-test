@@ -23,15 +23,13 @@ NEXT_PUBLIC_BASE_URL=https://api.tvmaze.com
  
 
  
-run jest tests -->> pnpm jest 
+run jest tests
  
   ```bash
 pnpm jest
 ```
   
- ```bash
-------------------------------------
-```
+
 
 
 
