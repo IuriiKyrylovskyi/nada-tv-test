@@ -1,3 +1,4 @@
+import React from 'react';
 import { GetServerSideProps } from 'next';
 
 import { IScheduleItem } from '../api/main';

@@ -8,6 +8,7 @@ import Cards from './Cards';
 
 const Home: React.FC<{ items: IScheduleItem[] }> = ({ items }) => {
 	const [scheduleItems, setScheduleItems] = useState<IScheduleItem[]>(items);
+
 	return (
 		<>
 			<Section>

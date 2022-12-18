@@ -1,17 +1,22 @@
+import React from 'react';
 import styled from 'styled-components';
 
 interface IStar {
 	size?: string;
-	rating?: number;
+	rating: number;
 	isBlue?: boolean;
 }
 
-const Stars: React.FC<IStar> = ({ size = '30px', rating = 0, isBlue = false }) => (
-	<StarsWrap size={size}>
-		<WhiteStars />
-		<ColoredStars rating={rating} isBlue={isBlue} />
-	</StarsWrap>
-);
+const Stars: React.FC<IStar> = ({ size = '30px', rating, isBlue = false }) => {
+	const calcRating = !!rating ? +(rating / 2).toFixed(1) : 0;
+
+	return (
+		<StarsWrap size={size}>
+			<WhiteStars />
+			<ColoredStars rating={calcRating} isBlue={isBlue} />
+		</StarsWrap>
+	);
+};
 
 const StarsWrap = styled.div<{ size: string }>`
 	display: inline-block;
