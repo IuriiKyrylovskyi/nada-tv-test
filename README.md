@@ -14,7 +14,7 @@ yarn dev
   
   
   
-variables: 
+add .env file with variable: 
 
 ```bash
 NEXT_PUBLIC_BASE_URL=https://api.tvmaze.com 
@@ -35,7 +35,19 @@ run e2e tests (playwright)
 ```bash 
 npx playwright test
 ```
-  
+
+estimates: 
+
+```
+start project - 3h
+main work: - create and connect api 1h
+           - create pages 6h
+           - adaptive to mobile 3h
+           - add image preloader 1h
+           - create pagination 1h
+install and set test configuration - 1h
+test - 3h
+  ```
 
 
 
