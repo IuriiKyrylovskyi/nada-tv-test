@@ -1,5 +1,7 @@
-import Document, { DocumentContext } from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+
+// const gtIframe = ;
 
 export default class MyDocument extends Document {
 	static async getInitialProps(ctx: DocumentContext) {
@@ -20,5 +22,23 @@ export default class MyDocument extends Document {
 		} finally {
 			sheet.seal();
 		}
+	}
+
+	render() {
+		return (
+			<Html lang='en-au'>
+				<Head />
+				<body>
+					<Main />
+					<NextScript />
+					<noscript
+						dangerouslySetInnerHTML={{
+							__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H4GP3N"
+							height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+						}}
+					/>
+				</body>
+			</Html>
+		);
 	}
 }
