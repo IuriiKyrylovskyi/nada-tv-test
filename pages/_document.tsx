@@ -33,7 +33,7 @@ export default class MyDocument extends Document {
 					<NextScript />
 					<noscript
 						dangerouslySetInnerHTML={{
-							__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H4GP3N"
+							__html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56MW6G7"
 							height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
 						}}
 					/>
