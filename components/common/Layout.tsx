@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Feedback from './Feedback';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -10,6 +11,7 @@ interface IChildren {
 const Layout: React.FC<IChildren> = ({ children }) => (
 	<>
 		<Header />
+		<Feedback />
 		<Main>{children}</Main>
 		<Footer />
 	</>
