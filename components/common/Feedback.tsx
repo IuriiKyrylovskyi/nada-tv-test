@@ -11,7 +11,7 @@ const Feedback: React.FC = () => (
 	</Wrap>
 );
 
-const Wrap = styled.footer`
+const Wrap = styled.div`
 	position: fixed;
 	top: 190px;
 	right: -40px;
@@ -37,9 +37,6 @@ const Container = styled.div`
 	display: flex;
 
 	& svg {
-		/* flex: 0 0 18px;
-		width: 18px;
-		height: 18px; */
 		transform: rotate(90deg);
 	}
 `;
