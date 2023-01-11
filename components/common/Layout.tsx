@@ -11,7 +11,7 @@ interface IChildren {
 const Layout: React.FC<IChildren> = ({ children }) => (
 	<>
 		<Header />
-		<Feedback />
+		{/* <Feedback /> */}
 		<Main>{children}</Main>
 		<Footer />
 	</>
